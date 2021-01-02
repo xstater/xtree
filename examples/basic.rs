@@ -22,4 +22,11 @@ fn main(){
         print!("{} ",itr);
     }
     println!();
+
+    for (depth,node) in tree.dfs_iter().depth(){
+        for _ in 0..depth {
+            print!("-");
+        }
+        println!("{}",node);
+    }
 }
