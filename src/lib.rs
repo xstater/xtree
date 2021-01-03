@@ -1,6 +1,6 @@
 //! # XTree
 //! XTree is a general purpose tree data structure.
-//! ## Construct tree
+//! ## Construct a tree
 //! ```
 //! extern crate xtree;
 //! use xtree::*;
@@ -21,14 +21,14 @@
 //! ```
 //! ## Depth-First iterate a tree
 //! ```
-//! for value in tree.dfs_iter(){
+//! for value in tree.df_iter(){
 //!     print!("{} ",value);
 //! }
 //! ```
 //! It will print ```1 2 3 4 5``` in console.
 //! ## Breadth-First iterate a tree and Change the value
 //! ```
-//! for value in tree.bfs_iter_mut(){
+//! for value in tree.bf_iter_mut(){
 //!     *value += 1;
 //!     print!("{} ",value);
 //! }
