@@ -1,15 +1,23 @@
 use crate::cursor::{Cursor, CursorMut};
 use std::ops::Div;
-use crate::dfs_iter::{DfsIter, DfsIterMut};
-use crate::bfs_iter::{BfsIter, BfsIterMut};
+use crate::df_iter::{DfIter, DfIterMut};
+use crate::bf_iter::{BfIter, BfIterMut};
 use std::collections::VecDeque;
 
+///The type representing a Tree
 pub struct Tree<T> {
     pub (in crate) data : T,
     pub (in crate) children : Vec<Tree<T>>,
 }
 
 impl<T> Tree<T>{
+    /// Create a tree only have one node with value
+    /// # Example
+    /// ```
+    /// use xtree::Tree;
+    /// let tree = Tree::new(3);
+    /// ```
+    /// !! Use tr! macro to instead
     pub fn new(data : T) -> Tree<T> {
         Tree{
             data,
@@ -17,10 +25,19 @@ impl<T> Tree<T>{
         }
     }
 
+    /// Add a child to root
+    /// # Example
+    /// ```
+    /// let mut t1 = tr!(1);
+    /// let t2 = tr!(2);
+    /// t1.add_child(t2);
+    /// ```
+    /// !! Use '/' operator to instead
     pub fn add_child(&mut self,child : Tree<T>){
         self.children.push(child);
     }
 
+    /// Get a immutable Cursor which points the root
     pub fn cursor(&self) -> Cursor<'_,T>{
         Cursor {
             root: &self,
@@ -29,6 +46,7 @@ impl<T> Tree<T>{
         }
     }
 
+    /// Get a mutable Cursor which points the root
     pub fn cursor_mut(&mut self) -> CursorMut<'_,T>{
         CursorMut{
             root: self as *mut _,
@@ -38,29 +56,34 @@ impl<T> Tree<T>{
         }
     }
 
-    pub fn dfs_iter(&self) -> DfsIter<'_,T> {
-        DfsIter{
+    /// Get a immutable Depth-First iterator
+    pub fn df_iter(&self) -> DfIter<'_,T> {
+        DfIter {
             stack: vec![self]
         }
     }
 
-    pub fn dfs_iter_mut(&mut self) -> DfsIterMut<'_,T> {
-        DfsIterMut{
+    /// Get a mutable Depth-First iterator
+    pub fn df_iter_mut(&mut self) -> DfIterMut<'_,T> {
+        DfIterMut {
             stack: vec![self]
         }
     }
 
-    pub fn bfs_iter(&self) -> BfsIter<'_,T>{
+    /// Get a immutable Breadth-first iterator
+    pub fn bf_iter(&self) -> BfIter<'_,T>{
         let mut v = VecDeque::new();
         v.push_back(self);
-        BfsIter{
+        BfIter {
             queue: v
         }
     }
-    pub fn bfs_iter_mut(&mut self) -> BfsIterMut<'_,T>{
+
+    /// Get a mutable Breadth-First iterator
+    pub fn bf_iter_mut(&mut self) -> BfIterMut<'_,T>{
         let mut v = VecDeque::new();
         v.push_back(self);
-        BfsIterMut{
+        BfIterMut {
             queue: v
         }
     }
@@ -75,6 +98,7 @@ impl<T> Div for Tree<T> {
     }
 }
 
+/// A useful macro is used to build a tree
 #[macro_export]
 macro_rules! tr {
     ($value:expr) => {Tree::new($value)};

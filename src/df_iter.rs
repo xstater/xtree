@@ -1,32 +1,36 @@
 use crate::Tree;
 
-pub struct DfsIter<'a,T>{
+/// The immutable Depth-First Iterator.
+pub struct DfIter<'a,T>{
     pub (in crate) stack : Vec<&'a Tree<T>>
 }
 
-pub struct DfsIterMut<'a,T>{
+/// The mutable Depth-First Iterator.
+pub struct DfIterMut<'a,T>{
     pub (in crate) stack : Vec<&'a mut Tree<T>>
 }
 
-impl<'a,T> DfsIter<'a,T> {
-    pub fn depth(self) -> DfsDepthIter<'a,T>{
+impl<'a,T> DfIter<'a,T> {
+    /// convert to a DfDepthIter
+    pub fn depth(self) -> DfDepthIter<'a,T>{
         let mut s = self;
-        DfsDepthIter {
+        DfDepthIter {
             stack : vec![(0,s.stack.pop().unwrap())]
         }
     }
 }
 
-impl<'a,T> DfsIterMut<'a,T>{
-    pub fn depth(self) -> DfsDepthIterMut<'a,T> {
+impl<'a,T> DfIterMut<'a,T>{
+    /// convert to a DfDepthIterMut
+    pub fn depth(self) -> DfDepthIterMut<'a,T> {
         let mut s = self;
-        DfsDepthIterMut{
+        DfDepthIterMut {
             stack: vec![(0,s.stack.pop().unwrap())],
         }
     }
 }
 
-impl<'a,T> Iterator for DfsIter<'a,T>{
+impl<'a,T> Iterator for DfIter<'a,T>{
     type Item = &'a T;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -41,7 +45,7 @@ impl<'a,T> Iterator for DfsIter<'a,T>{
     }
 }
 
-impl<'a,T> Iterator for DfsIterMut<'a,T>{
+impl<'a,T> Iterator for DfIterMut<'a,T>{
     type Item = &'a mut T;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -56,15 +60,17 @@ impl<'a,T> Iterator for DfsIterMut<'a,T>{
     }
 }
 
-pub struct DfsDepthIter<'a,T> {
+/// The immutable Depth-First Iterator with Depth information.
+pub struct DfDepthIter<'a,T> {
     stack : Vec<(usize,&'a Tree<T>)>
 }
 
-pub struct DfsDepthIterMut<'a,T> {
+/// The mutable Breadth-First Iterator with Depth information.
+pub struct DfDepthIterMut<'a,T> {
     stack : Vec<(usize,&'a mut Tree<T>)>
 }
 
-impl<'a,T> Iterator for DfsDepthIter<'a,T> {
+impl<'a,T> Iterator for DfDepthIter<'a,T> {
     type Item = (usize,&'a T);
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -79,7 +85,7 @@ impl<'a,T> Iterator for DfsDepthIter<'a,T> {
     }
 }
 
-impl<'a,T> Iterator for DfsDepthIterMut<'a,T> {
+impl<'a,T> Iterator for DfDepthIterMut<'a,T> {
     type Item = (usize,&'a mut T);
 
     fn next(&mut self) -> Option<Self::Item> {

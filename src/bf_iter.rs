@@ -1,37 +1,41 @@
 use crate::Tree;
 use std::collections::VecDeque;
 
-pub struct BfsIter<'a,T>{
+/// The immutable Breadth-First Iterator.
+pub struct BfIter<'a,T>{
     pub (in crate) queue : VecDeque<&'a Tree<T>>
 }
 
-pub struct BfsIterMut<'a,T>{
+/// The mutable Breadth-First Iterator.
+pub struct BfIterMut<'a,T>{
     pub (in crate) queue : VecDeque<&'a mut Tree<T>>
 }
 
-impl<'a,T> BfsIter<'a,T> {
-    pub fn depth(self) -> BfsDepthIter<'a,T>{
+impl<'a,T> BfIter<'a,T> {
+    /// convert to a BfDepthIter
+    pub fn depth(self) -> BfDepthIter<'a,T>{
         let mut s = self;
         let mut v = VecDeque::new();
         v.push_back((0,s.queue.pop_front().unwrap()));
-        BfsDepthIter {
+        BfDepthIter {
             queue : v
         }
     }
 }
 
-impl<'a,T> BfsIterMut<'a,T>{
-    pub fn depth(self) -> BfsDepthIterMut<'a,T> {
+impl<'a,T> BfIterMut<'a,T>{
+    /// convert to a BfDepthIterMut
+    pub fn depth(self) -> BfDepthIterMut<'a,T> {
         let mut s = self;
         let mut v = VecDeque::new();
         v.push_back((0,s.queue.pop_front().unwrap()));
-        BfsDepthIterMut {
+        BfDepthIterMut {
             queue : v
         }
     }
 }
 
-impl<'a,T> Iterator for BfsIter<'a,T>{
+impl<'a,T> Iterator for BfIter<'a,T>{
     type Item = &'a T;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -46,7 +50,7 @@ impl<'a,T> Iterator for BfsIter<'a,T>{
     }
 }
 
-impl<'a,T> Iterator for BfsIterMut<'a,T>{
+impl<'a,T> Iterator for BfIterMut<'a,T>{
     type Item = &'a mut T;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -61,15 +65,17 @@ impl<'a,T> Iterator for BfsIterMut<'a,T>{
     }
 }
 
-pub struct BfsDepthIter<'a,T> {
+/// The immutable Breadth-First Iterator with Depth information.
+pub struct BfDepthIter<'a,T> {
     queue : VecDeque<(usize,&'a Tree<T>)>
 }
 
-pub struct BfsDepthIterMut<'a,T> {
+/// The mutable Breadth-First Iterator with Depth information.
+pub struct BfDepthIterMut<'a,T> {
     queue : VecDeque<(usize,&'a mut Tree<T>)>
 }
 
-impl<'a,T> Iterator for BfsDepthIter<'a,T> {
+impl<'a,T> Iterator for BfDepthIter<'a,T> {
     type Item = (usize,&'a T);
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -84,7 +90,7 @@ impl<'a,T> Iterator for BfsDepthIter<'a,T> {
     }
 }
 
-impl<'a,T> Iterator for BfsDepthIterMut<'a,T> {
+impl<'a,T> Iterator for BfDepthIterMut<'a,T> {
     type Item = (usize,&'a mut T);
 
     fn next(&mut self) -> Option<Self::Item> {
