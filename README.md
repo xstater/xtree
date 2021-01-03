@@ -1,2 +1,2 @@
 # xtree
-a simple rust general purpose tree data structure.
+A simple rust general purpose tree data structure.

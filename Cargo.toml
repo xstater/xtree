@@ -2,6 +2,11 @@
 name = "xtree"
 version = "0.1.0"
 authors = ["xstater email:a166224@163.com"]
+license-file = "LICENSE"
+keywords = ["tree","cursor","ADT"]
+repository = "https://github.com/xstater/xtree"
+readme = "README.md"
+description = "A simple general purpose tree data structure."
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
