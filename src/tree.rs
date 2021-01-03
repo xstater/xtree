@@ -1,6 +1,8 @@
-use crate::cursor::Cursor;
+use crate::cursor::{Cursor, CursorMut};
 use std::ops::Div;
-use crate::iter::DfsIter;
+use crate::dfs_iter::{DfsIter, DfsIterMut};
+use crate::bfs_iter::{BfsIter, BfsIterMut};
+use std::collections::VecDeque;
 
 pub struct Tree<T> {
     pub (in crate) data : T,
@@ -24,16 +26,44 @@ impl<T> Tree<T>{
             root: &self,
             parents: vec![],
             now: &self,
-            child_itr: self.children.iter()
+        }
+    }
+
+    pub fn cursor_mut(&mut self) -> CursorMut<'_,T>{
+        CursorMut{
+            root: self as *mut _,
+            parents: vec![],
+            now: self as *mut _,
+            _marker: Default::default()
         }
     }
 
     pub fn dfs_iter(&self) -> DfsIter<'_,T> {
         DfsIter{
-            stack: vec![&self]
+            stack: vec![self]
         }
     }
 
+    pub fn dfs_iter_mut(&mut self) -> DfsIterMut<'_,T> {
+        DfsIterMut{
+            stack: vec![self]
+        }
+    }
+
+    pub fn bfs_iter(&self) -> BfsIter<'_,T>{
+        let mut v = VecDeque::new();
+        v.push_back(self);
+        BfsIter{
+            queue: v
+        }
+    }
+    pub fn bfs_iter_mut(&mut self) -> BfsIterMut<'_,T>{
+        let mut v = VecDeque::new();
+        v.push_back(self);
+        BfsIterMut{
+            queue: v
+        }
+    }
 }
 
 impl<T> Div for Tree<T> {

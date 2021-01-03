@@ -1,7 +1,9 @@
 mod tree;
 mod cursor;
-mod iter;
+mod dfs_iter;
+mod bfs_iter;
 
 pub use tree::Tree;
 pub use cursor::Cursor;
-pub use iter::*;
+pub use dfs_iter::*;
+pub use bfs_iter::*;
