@@ -2,7 +2,7 @@
 name = "xtree"
 version = "0.1.6"
 authors = ["xstater email:a166224@163.com"]
-license-file = "LICENSE"
+license-file = "./LICENSE"
 keywords = ["tree","cursor","ADT"]
 repository = "https://github.com/xstater/xtree"
 readme = "README.md"
