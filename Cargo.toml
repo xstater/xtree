@@ -1,6 +1,6 @@
 [package]
 name = "xtree"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["xstater email:a166224@163.com"]
 license-file = "LICENSE"
 keywords = ["tree","cursor","ADT"]
