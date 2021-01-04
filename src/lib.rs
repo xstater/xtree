@@ -109,4 +109,5 @@ pub use tree::Tree;
 pub use cursor::{Cursor,CursorMut};
 pub use df_iter::*;
 pub use bf_iter::*;
+pub use children_iter::{ChildrenIter,ChildrenIterMut};
 
