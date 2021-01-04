@@ -97,6 +97,7 @@ mod tree;
 mod cursor;
 mod df_iter;
 mod bf_iter;
+mod children_iter;
 
 pub use tree::Tree;
 pub use cursor::{Cursor,CursorMut};

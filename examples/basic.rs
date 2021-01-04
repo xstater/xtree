@@ -27,6 +27,11 @@ fn main(){
     }
 
     let mut cursor = tree.cursor();
+    println!("children of root:");
+    for child in cursor.children() {
+        print!("{} ",child)
+    }
+    println!();
     println!("root:{}",cursor.current());
     cursor.move_child(0);
     println!("first child:{}",cursor.current());

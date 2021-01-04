@@ -1,5 +1,6 @@
 use crate::tree::Tree;
 use std::marker::PhantomData;
+use crate::children_iter::{ChildrenIter, ChildrenIterMut};
 
 /// A immutable Cursor can freely visit node in tree
 pub struct Cursor<'a,T> {
@@ -44,6 +45,13 @@ impl<'a,T> Cursor<'a,T> {
     /// Get the count of children in current node
     pub fn children_count(&self) -> usize {
         self.now.children.len()
+    }
+
+    /// Get a immutable children iterator
+    pub fn children(&self) -> ChildrenIter<'a,T>{
+        ChildrenIter{
+            raw_iter: self.now.children.iter()
+        }
     }
 
     /// Return true if current node is the root
@@ -102,6 +110,13 @@ impl<'a,T> CursorMut<'a,T>{
     /// Get the count of children in current node
     pub fn children_count(&self) -> usize {
         unsafe{&*self.now}.children.len()
+    }
+
+    /// Get a immutable children iterator
+    pub fn children(&self) -> ChildrenIterMut<'a,T>{
+        ChildrenIterMut{
+            raw_iter: unsafe{&mut *self.now}.children.iter_mut()
+        }
     }
 
     /// Return true if current node is the root
