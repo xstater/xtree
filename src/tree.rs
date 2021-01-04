@@ -28,6 +28,8 @@ impl<T> Tree<T>{
     /// Add a child to root
     /// # Example
     /// ```
+    /// # extern crate xtree;
+    /// # use xtree::*;
     /// let mut t1 = tr!(1);
     /// let t2 = tr!(2);
     /// t1.add_child(t2);
