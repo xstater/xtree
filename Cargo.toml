@@ -1,6 +1,6 @@
 [package]
 name = "xtree"
-version = "0.1.7"
+version = "0.1.8"
 authors = ["xstater email:a166224@163.com"]
 homepage = "https://github.com/xstater/xtree"
 categories = ["data-structures"]
