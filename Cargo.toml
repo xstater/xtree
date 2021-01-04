@@ -2,6 +2,8 @@
 name = "xtree"
 version = "0.1.7"
 authors = ["xstater email:a166224@163.com"]
+homepage = "https://github.com/xstater/xtree"
+categories = ["data-structures"]
 license = "MIT"
 keywords = ["tree","cursor","ADT"]
 repository = "https://github.com/xstater/xtree"
