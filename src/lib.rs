@@ -1,5 +1,11 @@
 //! # XTree
 //! XTree is a general purpose tree data structure.
+//! #### Homepage
+//! [crates.io](https://crates.io/crates/xtree)
+//! #### Documentions
+//! [docs.rs](https://docs.rs/xtree/)
+//! #### Sources
+//! [github](https://github.com/xstater/xtree)
 //! ## Construct a tree
 //! ```
 //! extern crate xtree;
